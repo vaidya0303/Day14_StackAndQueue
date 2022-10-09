@@ -1,119 +1,159 @@
-/*
- * 1. ability to create queue ......uc3
- * 2 . ability to deque from beginning.......uc4
+/* 1.Ability to create a stack of 56,30,70..........UC1
+ * 2.Ability to peak and pop from the stack till it is empty 56,30,70 ........UC2
  */
-
  
-
 /*
- * main class
+ * creat class,class name is Stack
  */
 public class StacksAndQueue {
 
     /*
-     * number of items
+     * Declaration
      */
-    private Node front, rear;
-    private int currentSize; // number of items
-
-    /*
-     * class to define linked node
-     */
-    private class Node {
-        int data;
+    
+        Node top;
         Node next;
-    }
-
+    
     /*
-     *  create constructor name as QueueUsingLinkedListMain.
-     *  this is Zero argument constructor
+     * Represent a node of the singly linked list
      */
-    public StacksAndQueue() {
-
-        /*
-         * front and rear and currentSize is empty
-         */
-        front = null;
-        rear = null;
-        currentSize = 0;
-    }
-
-    /*
-     * create a method isEmpty
-     * they are boolean type that means Returns true if the queue is empty, else false.
-     */
-    public boolean isEmpty() {
-        return (currentSize == 0);
-    }
-
-    /*
-     * create a method name as dequeue.
-     * Remove item from the beginning of the list.
-     */
-
-    public int dequeue() {
-        int data = front.data;
-        front = front.next;
-
-        /*
-         * if condition is true then rear is null
-         */
-        if (isEmpty()) {
-            rear = null;
+        public class Node {
+    
+            int data;
+    
+            Node next;
         }
-        currentSize--;
-        System.out.println(data + " removed from the queue");
-        return data;
-    }
-
-    /*
-     * create enqueue method and pass the parameter
-     * Add data to the end of the list.
-     */
-    public void enqueue(int data) {
-        Node oldRear = rear;
-        rear = new Node();
-        rear.data = data;
-        rear.next = null;
-
-        /*
-         * condition check if isEmpty is true then front data is equal to rear data
-         * if condition false olderar.next = rear
-         * then currentsize is increased
-         */
-        if (isEmpty()) {
-            front = rear;
-        } else {
-            oldRear.next = rear;
+    
+        public void Node() {
+    
+            this.top = null;
         }
-        currentSize++;
-        System.out.println(data + " added to the queue");
-    }
-
+        /*
+         * create a method name as push and passing parameter
+         *  the push is Adds an item in the stack. If the stack is full, then it is said to be an Overflow condition.
+         */
+    
+        public void push(int number) {
+    
+            /*
+             * create a new node
+             */
+            Node node = new Node();
+    
+            node.data = number;
+    
+            node.next = top;
+    
+            top = node;
+        }
+      /*
+       *  create a method isEmpty
+       * they are boolean type that means Returns true if the stack is empty, else false.
+       */
+        public boolean isEmpty() {
     /*
-     * main method all the program execute in main method
+     * return value if top is null then true
      */
-    public static void main(String a[]) {
-
+            return top == null;
+        }
+    
         /*
-         * create object of QueueUsingLinkedListMain class
-         * object name is queue
-         *  not directly calling this class so
-         *  we create object coz QueueUsingLinkedListMain in this all method is non static
+         * creat a method peek
+         * this is Returns the top element of the stack.
          */
-        StacksAndQueue queue = new StacksAndQueue();
-
+    
+        public int peek() {
+    
+            /*
+             * if isEmpty method is true then return top element
+             * if they are false then print stack is empty
+             */
+            if (!isEmpty()) {
+    
+                return top.data;
+            }
+    
+            else {
+    
+                System.out.println("stack is empty.");
+    
+                return -1;
+            }
+    
+        }
+    
         /*
-         * calling method
+         * create a method name as pop
+         * the pop is  Removes an item from the stack.
+         * The items are popped in the reversed order in which they are pushed.
+         * If the stack is empty, then it is said to be an Underflow condition.
          */
-        queue.enqueue( 56);
-        queue.dequeue();
-        queue.enqueue(30);
-        queue.dequeue();
-        queue.enqueue(70);
-        queue.dequeue();
-        System.out.println("queue is empty");
-
-
+    
+        public void pop() {
+    
+            /*
+             * while loop is used if Top is not null then peek the element.
+             * same as other elements
+             * peek and pop operation to do until the stack is empty
+             */
+            while (top != null) {
+    
+                System.out.println("this is peak now :: " + peek());
+    
+                top = top.next;
+    
+                System.out.println("one item removed from stack...");
+            }
+              /*
+               * all the elements are removed then print stack is empty
+               */
+            System.out.println("now stack is empty :: ");
+        }
+    
+        /*
+         *  create method name as printStack
+         */
+        public void printStack() {
+    
+            Node node = top;
+    
+            /*
+             * using while loop
+             * node is not null then print node data
+             */
+    
+            while (node != null) {
+    
+                System.out.println(node.data);
+    
+                node = node.next;
+    
+            }
+        }
+        /*
+         * main method all program execute in main method
+         */
+    
+        public static void main(String[] args) {
+    
+            /*
+             * create object for Stack class.
+             * object name is stackoperation
+             */
+    
+            StacksAndQueue stackoperation = new StacksAndQueue();
+    
+            /*
+             * calling the method from object name
+             * objectname.methodname();
+             */
+    
+            stackoperation.push(56);   //push operation add 1st element
+    
+            stackoperation.push(30);   //push operation add 2nd element
+    
+            stackoperation.push(70);   //push operation add 3rd element
+    
+            stackoperation.pop();  //pop operation for remove element.
+        }
     }
-}
